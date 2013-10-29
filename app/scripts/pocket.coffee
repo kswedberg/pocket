@@ -9,7 +9,7 @@ class window.Pocket extends Backbone.Events
     @registerListeners()
     @handleSignInAndSignOut()
 
-    $.when(@loadAppInfo(), @loadAppConfig(), @authenticate()).then =>
+    $.when(@loadAppInfo(), @authenticate()).then =>
       @router = new Pocket.Router
       @app    = new Pocket.ApplicationView
 
@@ -27,7 +27,8 @@ class window.Pocket extends Backbone.Events
   handleAuthenticateSuccess: () =>
     @isAuthenticated = true;
     @$el.addClass 'authenticated'
-    hoodieAdmin.resolveWith @isAuthenticated
+    $.when(@loadAppConfig()).then =>
+      hoodieAdmin.resolveWith @isAuthenticated
 
   #
   handleAuthenticateError: () =>
