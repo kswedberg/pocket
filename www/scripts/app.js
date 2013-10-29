@@ -56,7 +56,7 @@
       this.registerHandlebarsHelpers();
       this.registerListeners();
       this.handleSignInAndSignOut();
-      $.when(this.loadAppInfo(), this.loadAppConfig(), this.authenticate()).then(function() {
+      $.when(this.loadAppInfo(), this.authenticate()).then(function() {
         _this.router = new Pocket.Router;
         _this.app = new Pocket.ApplicationView;
         return Backbone.history.start();
@@ -72,9 +72,12 @@
     };
 
     Pocket.prototype.handleAuthenticateSuccess = function() {
+      var _this = this;
       this.isAuthenticated = true;
       this.$el.addClass('authenticated');
-      return hoodieAdmin.resolveWith(this.isAuthenticated);
+      return $.when(this.loadAppConfig()).then(function() {
+        return hoodieAdmin.resolveWith(_this.isAuthenticated);
+      });
     };
 
     Pocket.prototype.handleAuthenticateError = function() {
