@@ -6,12 +6,6 @@
     "type": "git",
     "url": "https://github.com/hoodiehq/pocket.git"
   },
-  "dependencies": {
-    "hoodie-app": "git://github.com/hoodiehq/hoodie-app.git",
-    "hoodie-worker-users": "git://github.com/hoodiehq/worker-users.git",
-    "hoodie-worker-shares": "git://github.com/hoodiehq/worker-shares.git",
-    "hoodie-worker-email-out": "git://github.com/hoodiehq/worker-email-out.git"
-  },
   "scripts": {
     "start": "node node_modules/hoodie-app/lib/hoodie-app.js"
   },
